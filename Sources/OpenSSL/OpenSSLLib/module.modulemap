@@ -1,0 +1,22 @@
+
+// Run this script to modify the openssl headers. Such that there includes correctly for xcode
+//sed -E -i '' 's/#[[:space:]]*include <openssl\/(.*).h>/#include \"\1\.h"/' ./include/openssl/*.h1
+
+/// Expose OpenSSL for external Swift usage
+module OpenSSLLib {
+    //header "shim.h"
+    header "./include/openssl/bio.h"
+    header "./include/openssl/conf.h"
+    header "./include/openssl/evp.h"
+    header "./include/openssl/err.h"
+    header "./include/openssl/ssl.h"
+    header "./include/openssl/pkcs7.h"
+    header "./include/openssl/pkcs12.h"
+    header "./include/openssl/pem.h"
+    header "./include/openssl/cms.h"
+    header "./include/openssl/x509.h"
+    header "cms_verify_wrapper.h"
+    header "cms_sign_wrapper.h"
+//    header "d2i_wrapper.h"
+    export * 
+}

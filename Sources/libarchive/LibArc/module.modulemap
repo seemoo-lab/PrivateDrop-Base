@@ -1,0 +1,9 @@
+
+
+/* module.modulemap */
+module LibArc [system] {
+   header "./archive.h"
+   header "./archive_entry.h"
+   //header "./bzlib.h"
+   export *
+}

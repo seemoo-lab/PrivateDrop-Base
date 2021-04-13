@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Version</key>
+	<integer>2</integer>
+	<key>altDsID</key>
+	<string>000523-08-31f9dfe5-a416-4e22-b675-e4ed4d4bf565</string>
+	<key>encDsID</key>
+	<string>000523-08-31f9dfe5-a416-4e22-b675-e4ed4d4bf565</string>
+	<key>SuggestValidDuration</key>
+	<integer>2592000</integer>
+	<key>ValidAsOf</key>
+	<date>2021-01-19T14:05:02Z</date>
+	<key>ValidatedEmailHashes</key>
+	<array>
+		<string>e7e04d956860dc05f482dcc7e9bd3ffb3adc76ba2c4e78148a2f23d55133b806</string>
+	</array>
+	<key>ValidatedPhoneHashes</key>
+	<array>
+	</array>
+</dict>
+</plist>

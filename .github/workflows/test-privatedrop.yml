@@ -1,0 +1,27 @@
+name: "Test PrivateDrop Base"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: ./
+
+jobs:
+  test-privatedrop:
+    runs-on: macos-11.0
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v2
+      - name: "Select Xcode 12"
+        uses: devbotsxyz/xcode-select@v1
+        with:
+          version: "12"
+      - name: "Run tests"
+        run: |
+          xcodebuild clean
+          xcodebuild -scheme PrivateDropBase -sdk macosx -project OpenDrop\ Base.xcodeproj test

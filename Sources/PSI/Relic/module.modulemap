@@ -1,0 +1,7 @@
+
+/* module.modulemap */
+module Relic [system] {
+   header "./include/relic.h"
+   header "./relic_wrapper.h"
+   export *
+}
