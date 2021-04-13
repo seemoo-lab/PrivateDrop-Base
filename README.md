@@ -1,6 +1,6 @@
-# OpenDrop Base
+# PrivateDrop Base
 
-The OpenDrop Base framework is a Swift framework that supports Apple's AirDrop and the enhanced version PrivateDrop that adds an extra layer of privacy using private set intersection (PSI). 
+The PrivateDrop Base framework is a Swift framework that supports Apple's AirDrop and the enhanced version PrivateDrop that adds an extra layer of privacy using private set intersection (PSI). 
 
 ## Configuration
 AirDrop and PSI have a couple of pre-requesites to be used properly: <br> 
@@ -12,7 +12,7 @@ Our test apps contain all those values and it is possible to use AirDrop (withou
 
 Example Code:
 ```swift
-let configuration = OpenDrop.Configuration(
+let configuration = PrivateDrop.Configuration(
             recordData: /*Officially signed record data by Apple*/,
             pkcs12: /*Self-signed or officially signed certificate by Apple (if record data is used)*/,
             computerName: /*A custom name*/,
@@ -26,21 +26,21 @@ let configuration = OpenDrop.Configuration(
 ## Precomputation
 To speed up the PSI communication it is recommended to precompute some values before communicating with other PrivateDrop devices. 
 ```swift 
-let opendrop = OpenDrop(with: configuration)
-opendrop.precomputeContactValues {
+let privatedrop = PrivateDrop(with: configuration)
+privatedrop.precomputeContactValues {
     // Called when finished 
 }
 ```
 
 ## Launching a server (e.g. receiving files)
 
-To receive files, you would need to (1) start the OpenDrop server and (2) add a delegate to handle the incoming file requests and files. The example code will show how to do this: 
+To receive files, you would need to (1) start the PrivateDrop server and (2) add a delegate to handle the incoming file requests and files. The example code will show how to do this: 
 
 ```swift
-    struct ReceiverDelegate: OpenDropReceiverDelegate {
+    struct ReceiverDelegate: PrivateDropReceiverDelegate {
         
-        // OpenDrop is ready to receive files
-        func openDropReady() {
+        // PrivateDrop is ready to receive files
+        func privateDropReady() {
             
         }
 
@@ -67,27 +67,27 @@ To receive files, you would need to (1) start the OpenDrop server and (2) add a 
     }
 
 let receiverDelegate = ReceiverDelegate()
-let opendrop = OpenDrop(with: configuration)
-opendrop.receiverDelegate = receiverDelegate
-opendrop.startListening() 
+let privatedrop = PrivateDrop(with: configuration)
+privatedrop.receiverDelegate = receiverDelegate
+privatedrop.startListening() 
 ```
 
 ## Finding peers and sending files 
 
 AirDrop normally works in two steps: At first, the sender discovers all surrounding receivers and secondly the user selects a receiver. AirDrop then sends a request to the receiver that asks the user if he/she wants to receive a file. If accepted, the file will be transferred. 
-To perform these tasks with OpenDrop follow the example code below. A sender delegate is needed for this. 
+To perform these tasks with PrivateDrop follow the example code below. A sender delegate is needed for this. 
 
 ```swift 
-struct SendingFiles: OpenDropSenderDelegate {
-    let opendrop: OpenDrop
+struct SendingFiles: PrivateDropSenderDelegate {
+    let privatedrop: PrivateDrop
     init() {
-        self.opendrop = OpenDrop(with: configuration)
+        self.privatedrop = PrivateDrop(with: configuration)
     }
 
     /// Found a peer using Bonjour. Before a Peer can receive a file use `detectIfContact`
     func found(peer: Peer) {
         //Now discover if this peer is a contact or not. We use PSI for enhanced privacy 
-        self.openDrop?.detectContact(for: peer, usePSI: true)
+        self.privatedrop?.detectContact(for: peer, usePSI: true)
     }
     
     //Finished the PSI protocol with the peer
@@ -103,7 +103,7 @@ struct SendingFiles: OpenDropSenderDelegate {
             case .contacts(let contactIds): 
                 // We only send files to contacts 
                 do {
-                    try self.openDrop?.sendFile(at: fileURL/*local file URL*/, to: receiver)
+                    try self.privatedrop?.sendFile(at: fileURL/*local file URL*/, to: receiver)
                 }catch {
                     //Handle errors here 
                     fatalError("Errors not handled")
@@ -131,6 +131,6 @@ struct SendingFiles: OpenDropSenderDelegate {
 
 let sendingFiles = SendingFiles() 
 // Browse for privateDrop only receivers. 
-sendingFiles.opendrop.browse(privateDropOnly: true)
+sendingFiles.privatedrop.browse(privateDropOnly: true)
 
 ```

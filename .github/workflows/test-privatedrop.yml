@@ -24,4 +24,4 @@ jobs:
       - name: "Run tests"
         run: |
           xcodebuild clean
-          xcodebuild -scheme PrivateDropBase -sdk macosx -project OpenDrop\ Base.xcodeproj test
+          xcodebuild -scheme PrivateDropBase -sdk macosx -project PrivateDrop\ Base.xcodeproj test
