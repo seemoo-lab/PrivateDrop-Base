@@ -36,7 +36,7 @@ final class PrivateDrop_ServerTests: XCTestCase {
             let server = Server(config: config, psiController: psiController!)
             self.server = server
             try server.startServer(
-                port: 8443,
+                port: 4492,
                 completion: { _, _ in
 
                 })
@@ -64,7 +64,7 @@ final class PrivateDrop_ServerTests: XCTestCase {
         let client = self.client
 
         do {
-            try privateDrop.startListening()
+            try privateDrop.startListening(port: 3945)
             sleep(2)
 
             let succeeded = {
@@ -157,7 +157,7 @@ final class PrivateDrop_ServerTests: XCTestCase {
                 }
             })
 
-            try privateDrop.startListening()
+            try privateDrop.startListening(port: 9456)
 
             self.wait(for: [expect], timeout: 31)
 
@@ -192,7 +192,7 @@ final class PrivateDrop_ServerTests: XCTestCase {
         let recDelegate = TestReceiverDelegate()
         server.receiverDelegate = recDelegate
         try server.startServer(
-            port: 8443,
+            port: 9385,
             completion: { _, _ in
 
             })
@@ -224,7 +224,7 @@ final class PrivateDrop_ServerTests: XCTestCase {
 
     func testUpload() throws {
         let privateDrop = PrivateDrop(with: .testEmpty)
-        try privateDrop.startListening()
+        try privateDrop.startListening(port: 7568)
         sleep(1)
 
         let expect = self.expectation(description: "Upload")

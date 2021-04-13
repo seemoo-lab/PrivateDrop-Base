@@ -10,7 +10,7 @@ class ClientTests: XCTestCase {
     override func setUpWithError() throws {
         privateDrop.receiverDelegate = receiverDelegate
         if !privateDrop.server.isRunning {
-            try privateDrop.startListening()
+            try privateDrop.startListening(port: Int(arc4random() % 3000) + 2000)
         }
     }
 

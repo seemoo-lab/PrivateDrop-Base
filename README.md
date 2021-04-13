@@ -2,6 +2,7 @@
 
 The PrivateDrop Base framework is a Swift framework that supports Apple's AirDrop and the enhanced version PrivateDrop that adds an extra layer of privacy using private set intersection (PSI). 
 
+
 ## Configuration
 AirDrop and PSI have a couple of pre-requesites to be used properly: <br> 
 1. A certificate signed by Apple 
@@ -134,3 +135,7 @@ let sendingFiles = SendingFiles()
 sendingFiles.privatedrop.browse(privateDropOnly: true)
 
 ```
+
+## Usenix Paper 
+This work is part of our paper on **PrivateDrop**. <br>
+Alexander Heinrich, Matthias Hollick, Thomas Schneider, Milan Stute, and Christian Weinert, TU Darmstadt. **PrivateDrop: Practical Privacy-Preserving Authentication for Apple AirDrop** Proceedings on 30th USENIX Security Symposium. [📄 Link](https://www.usenix.org/conference/usenixsecurity21/presentation/heinrich).
